@@ -1,8 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:expense_tracker/HomeScreen/home_screen.dart';
+import 'package:flutter/services.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
+    void _saveBudget() {
+    final String budgetAmount = _budgetController.text;
+
+    if (budgetAmount.isNotEmpty ) {
+      // Perform your save logic here
+      print('Budget Amount: $budgetAmount');
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Budget saved successfully!'),
+      ));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Please enter a budget amount and purpose.'),
+      ));
+    }
+    }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +39,7 @@ class WelcomeScreen extends StatelessWidget {
               children: [
                 SizedBox(height: 80), // Add some top padding
                 Text(
-                  "Let's setup your account!",
+                  "Let's add your current Month's Budget",
                   style: TextStyle(
                     fontSize: 34,
                     fontFamily: 'Inter',
@@ -32,7 +48,7 @@ class WelcomeScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 16),
                 Text(
-                  "Account can be your bank, credit card or your wallet.",
+                  "You can more efficiently plan and control your spending when you have a budget. You can monitor your spending and make sure your financial objectives are met by creating a monthly budget.",
                   style: TextStyle(
                     fontSize: 16,
                     fontFamily: 'Inter',
@@ -41,9 +57,26 @@ class WelcomeScreen extends StatelessWidget {
                 ),
               ],
             ),
+            SizedBox(height: 26),
+            TextField(
+              decoration: InputDecoration(
+                // labelText: 'Enter your text',
+                hintText: 'Budget Amount...',
+                border: OutlineInputBorder(),
+              ),
+              keyboardType: TextInputType.number, // Set keyboard type to number
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly // Only allows input of digits
+              ],
+              onChanged: (value) {
+                // Handle changes to the text field input
+                print('Input value: $value');
+              },
+            ),
             const Spacer(),
             ElevatedButton(
               onPressed: () {
+                _isButtonEnabled ? _saveBudget : null,
                 Navigator.pushReplacement(
                   // ignore: use_build_context_synchronously
                   context,
