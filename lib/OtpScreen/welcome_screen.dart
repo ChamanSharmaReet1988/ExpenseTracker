@@ -1,14 +1,35 @@
+import 'package:expense_tracker/HomeScreen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:expense_tracker/HomeScreen/home_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({super.key});
+  WelcomeScreen({super.key});
+  final TextEditingController _budgetController = TextEditingController();
+
+  void _saveMethod(BuildContext context) {
+    final String budgetAmount = _budgetController.text;
+    if (budgetAmount.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Budget is mandatory to fill'), backgroundColor: Colors.red),
+      );
+      return;
+    }
+
+    final int? budgetValue = int.tryParse(budgetAmount);
+    if (budgetValue == null || budgetValue <= 1000) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Budget amount must be greater than 1000.'), backgroundColor: Colors.red),
+      );
+      return;
+    }
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeScreen()),
+    );
+
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
         // ignore: deprecated_member_use
         body: WillPopScope(
       onWillPop: () async {
@@ -44,6 +65,7 @@ class WelcomeScreen extends StatelessWidget {
             ),
             const SizedBox(height: 26),
             TextField(
+              controller: _budgetController,
               decoration: const InputDecoration(
                 // labelText: 'Enter your text',
                 hintText: 'Budget Amount...',
@@ -61,13 +83,7 @@ class WelcomeScreen extends StatelessWidget {
             ),
             const Spacer(),
             ElevatedButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  // ignore: use_build_context_synchronously
-                  context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()),
-                );
-              },
+              onPressed: () => _saveMethod(context),
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF7F3DFF),
                 shape: RoundedRectangleBorder(
