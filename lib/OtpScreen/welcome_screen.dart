@@ -1,24 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:expense_tracker/HomeScreen/home_screen.dart';
 import 'package:flutter/services.dart';
+import 'package:expense_tracker/HomeScreen/home_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
-    void _saveBudget() {
-    final String budgetAmount = _budgetController.text;
-
-    if (budgetAmount.isNotEmpty ) {
-      // Perform your save logic here
-      print('Budget Amount: $budgetAmount');
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Budget saved successfully!'),
-      ));
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Please enter a budget amount and purpose.'),
-      ));
-    }
-    }
 
   @override
   Widget build(BuildContext context) {
@@ -57,16 +42,17 @@ class WelcomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 26),
+            const SizedBox(height: 26),
             TextField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 // labelText: 'Enter your text',
                 hintText: 'Budget Amount...',
                 border: OutlineInputBorder(),
               ),
               keyboardType: TextInputType.number, // Set keyboard type to number
               inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly // Only allows input of digits
+                FilteringTextInputFormatter
+                    .digitsOnly // Only allows input of digits
               ],
               onChanged: (value) {
                 // Handle changes to the text field input
