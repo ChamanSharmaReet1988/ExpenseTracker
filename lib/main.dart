@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:expense_tracker/LoginScreen/login_view.dart';
+import 'package:expense_tracker/Database/database.dart';
 import 'package:expense_tracker/LoginScreen/login_view.dart';
 
 // ignore: file_names
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  DatabaseHelper.open();
 
   await Firebase.initializeApp();
   runApp(const MyApp());
