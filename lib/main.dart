@@ -1,4 +1,4 @@
-import 'package:expense_tracker/OtpScreen/welcome_screen.dart';
+import 'package:expense_tracker/TabBarScreen/tab_bar_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:expense_tracker/LoginScreen/login_view.dart';
@@ -19,6 +19,11 @@ class MyApp extends StatelessWidget {
   Future<bool> checkLogin() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   return prefs.getBool('isLoggedIn') ?? false;
+}
+
+Future<bool> checkLoginFirstorNot() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  return prefs.getBool('isLoggedInFirst') ?? false;
 }
 
   // This widget is the root of your application.
@@ -43,7 +48,7 @@ class MyApp extends StatelessWidget {
             );
           } else {
             bool isLoggedIn = snapshot.data ?? false;
-            return isLoggedIn ? WelcomeScreen() : LoginPage();
+            return isLoggedIn ? const TabBarScreen() : const LoginPage();
           }
         },
       ),

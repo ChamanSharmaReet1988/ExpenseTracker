@@ -47,6 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
         isLoading = false;
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setBool('isLoggedIn', true);
+        await prefs.setBool('isLoggedInFirst', true);
         setState(() {
           Navigator.push(
             context,

@@ -32,6 +32,11 @@ class PreferencesHelper {
     _prefs.setBool('isLoggedIn', value ?? false);
   }
 
+  bool? get isLoggedInFirst => _prefs.getBool('isLoggedInFirst');
+  set isLoggedInFirst(bool? value) {
+    _prefs.setBool('isLoggedInFirst', value ?? false);
+  }
+
   // Method to remove all preferences
   Future<void> clear() async {
     await _prefs.clear();
