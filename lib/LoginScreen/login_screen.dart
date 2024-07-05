@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:expense_tracker/Utility/constant.dart';
 import 'package:expense_tracker/OtpScreen/otp_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -42,8 +43,11 @@ class _LoginScreenState extends State<LoginScreen> {
       codeSent: (
         String verificationId,
         int? resendToken,
-      ) {
+      ) async {
         isLoading = false;
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setBool('isLoggedIn', true);
+        await prefs.setBool('isLoggedInFirst', true);
         setState(() {
           Navigator.push(
             context,
