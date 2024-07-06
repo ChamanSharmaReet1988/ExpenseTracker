@@ -1,9 +1,9 @@
-import 'package:expense_tracker/TabBarScreen/tab_bar_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:expense_tracker/Database/database.dart';
-import 'package:expense_tracker/LoginScreen/login_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:expense_tracker/LoginScreen/login_view.dart';
+import 'package:expense_tracker/TabBarScreen/tab_bar_screen.dart';
 
 // ignore: file_names
 
@@ -18,21 +18,16 @@ void main() async {
 // ignore: must_be_immutable
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-    
-  Future<bool> checkLogin() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  return prefs.getBool('isLoggedIn') ?? false;
-}
 
-Future<bool> checkLoginFirstorNot() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  return prefs.getBool('isLoggedInFirst') ?? false;
-}
+  Future<bool> checkLogin() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('isLoggedIn') ?? false;
+  }
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-   return MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: FutureBuilder<bool>(
         future: checkLogin(),
@@ -56,6 +51,5 @@ Future<bool> checkLoginFirstorNot() async {
         },
       ),
     );
-
   }
 }

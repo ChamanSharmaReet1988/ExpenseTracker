@@ -1,6 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:flutter/foundation.dart';
+// ignore: depend_on_referenced_packages
 
 class DatabaseHelper {
   static final DatabaseHelper _instance = DatabaseHelper._internal();
@@ -22,14 +23,25 @@ class DatabaseHelper {
     return await openDatabase(
       path,
       version: 1,
-      onCreate: _onCreate,
+      onCreate: onCreate,
+      onUpgrade: onUpgrade,
     );
   }
 
-  static Future<void> _onCreate(Database db, int version) async {
+  static Future<void> onCreate(Database db, int version) async {
     await db.execute(
       'CREATE TABLE ExpenseTable(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, date TEXT, time TEXT, amount TEXT, desc Text, category Text)',
     );
+    await db.execute(
+      'CREATE TABLE BudgetTable(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, date TEXT, time TEXT, amount TEXT)',
+    );
+  }
+
+  static Future<void> onUpgrade(
+      Database db, int oldVersion, int newVersion) async {
+    if (oldVersion < 2) {
+      // Create new table in version 2
+    }
   }
 
   Future<void> close() async {
