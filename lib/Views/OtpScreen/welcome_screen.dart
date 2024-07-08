@@ -1,6 +1,6 @@
-import 'package:expense_tracker/HomeScreen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:expense_tracker/Views/HomeScreen/home_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   WelcomeScreen({super.key});
@@ -10,7 +10,9 @@ class WelcomeScreen extends StatelessWidget {
     final String budgetAmount = _budgetController.text;
     if (budgetAmount.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Budget is mandatory to fill'), backgroundColor: Colors.red),
+        const SnackBar(
+            content: Text('Budget is mandatory to fill'),
+            backgroundColor: Colors.red),
       );
       return;
     }
@@ -18,13 +20,16 @@ class WelcomeScreen extends StatelessWidget {
     final int? budgetValue = int.tryParse(budgetAmount);
     if (budgetValue == null || budgetValue <= 1000) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Budget amount must be greater than 1000.'), backgroundColor: Colors.red),
+        const SnackBar(
+            content: Text('Budget amount must be greater than 1000.'),
+            backgroundColor: Colors.red),
       );
       return;
     }
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeScreen()),
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const HomeScreen()),
     );
-
   }
 
   @override

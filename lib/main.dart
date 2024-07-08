@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:expense_tracker/Database/database.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:expense_tracker/LoginScreen/login_view.dart';
-import 'package:expense_tracker/TabBarScreen/tab_bar_screen.dart';
+import 'package:expense_tracker/Views/LoginScreen/login_view.dart';
+import 'package:expense_tracker/Views/TabBarScreen/tab_bar_screen.dart';
 
 // ignore: file_names
 

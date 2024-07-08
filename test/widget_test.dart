@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:expense_tracker/LoginScreen/login_view.dart';
+import 'package:expense_tracker/Views/LoginScreen/login_view.dart';
 // This is a basic Flutter widget test.
 //
 // To perform an interaction with a widget in your test, use the WidgetTester

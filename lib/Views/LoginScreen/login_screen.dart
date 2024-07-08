@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:expense_tracker/Utility/constant.dart';
-import 'package:expense_tracker/OtpScreen/otp_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:expense_tracker/Views/OtpScreen/otp_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

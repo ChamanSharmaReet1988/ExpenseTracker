@@ -1,9 +1,9 @@
-import 'package:expense_tracker/OtpScreen/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:expense_tracker/LoginScreen/login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:expense_tracker/Views/OtpScreen/welcome_screen.dart';
+import 'package:expense_tracker/Views/LoginScreen/login_screen.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -18,6 +18,7 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     super.initState();
   }
+
   int carouselCurrentIndex = 0;
   final CarouselController _controller = CarouselController();
 
