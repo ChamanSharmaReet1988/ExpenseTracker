@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:expense_tracker/Database/database.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:expense_tracker/Utility/preferences_helper.dart';
 import 'package:expense_tracker/Views/LoginScreen/login_view.dart';
 import 'package:expense_tracker/Views/TabBarScreen/tab_bar_screen.dart';
 
@@ -10,6 +11,9 @@ import 'package:expense_tracker/Views/TabBarScreen/tab_bar_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DatabaseHelper.open();
+
+  PreferencesHelper prefsHelper = PreferencesHelper();
+  await prefsHelper.init();
 
   await Firebase.initializeApp();
   runApp(const MyApp());

@@ -1,12 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:expense_tracker/Views/HomeScreen/home_screen.dart';
+import 'package:expense_tracker/Utility/constant.dart';
+import 'package:expense_tracker/Models/budget_model.dart';
+import 'package:expense_tracker/Database/budget_table.dart';
+import 'package:expense_tracker/Utility/preferences_helper.dart';
+import 'package:expense_tracker/Views/TabBarScreen/tab_bar_screen.dart';
 
-class WelcomeScreen extends StatelessWidget {
-  WelcomeScreen({super.key});
+class WelcomeScreen extends StatefulWidget {
+  const WelcomeScreen({super.key});
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _WelcomeScreen createState() => _WelcomeScreen();
+}
+
+class _WelcomeScreen extends State<WelcomeScreen> {
   final TextEditingController _budgetController = TextEditingController();
+  String selectedCurrencyCode = 'INR';
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   void _saveMethod(BuildContext context) {
+    PreferencesHelper prefs = PreferencesHelper();
+    prefs.currency = selectedCurrencyCode;
+
+    DateTime now = DateTime.now();
+    BudgetTable budgetTable = BudgetTable();
+    Budget myBudget = Budget(
+      id: 1,
+      title: "Budget",
+      year: "$now.year",
+      month: "$now.month",
+      day: "$now.day",
+      time: "$now.time",
+      amount: _budgetController.text,
+    );
+    budgetTable.insertItemIntoBudget(myBudget);
+
     final String budgetAmount = _budgetController.text;
     if (budgetAmount.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -28,7 +61,7 @@ class WelcomeScreen extends StatelessWidget {
     }
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => const HomeScreen()),
+      MaterialPageRoute(builder: (context) => const TabBarScreen()),
     );
   }
 
@@ -69,22 +102,54 @@ class WelcomeScreen extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 26),
-            TextField(
-              controller: _budgetController,
-              decoration: const InputDecoration(
-                // labelText: 'Enter your text',
-                hintText: 'Budget Amount...',
-                border: OutlineInputBorder(),
-              ),
-              keyboardType: TextInputType.number, // Set keyboard type to number
-              inputFormatters: [
-                FilteringTextInputFormatter
-                    .digitsOnly // Only allows input of digits
+            Row(
+              children: [
+                Expanded(
+                    flex: 2,
+                    child: SizedBox(
+                      height: 60,
+                      child: DropdownButtonFormField<String>(
+                        value: selectedCurrencyCode,
+                        items: Constant.currencyCodes.map((String code) {
+                          return DropdownMenuItem<String>(
+                            value: code,
+                            child: Text(code),
+                          );
+                        }).toList(),
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            selectedCurrencyCode = newValue!;
+                          });
+                        },
+                        decoration: const InputDecoration(
+                          labelText: 'Currency',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    )),
+                const SizedBox(width: 10),
+                Expanded(
+                    flex: 5,
+                    child: SizedBox(
+                        height: 60,
+                        child: TextField(
+                          controller: _budgetController,
+                          decoration: const InputDecoration(
+                            // labelText: 'Enter your text',
+                            hintText: 'Budget Amount...',
+                            border: OutlineInputBorder(),
+                          ),
+                          keyboardType: TextInputType
+                              .number, // Set keyboard type to number
+                          inputFormatters: [
+                            FilteringTextInputFormatter
+                                .digitsOnly // Only allows input of digits
+                          ],
+                          onChanged: (value) {
+                            // Handle changes to the text field input
+                          },
+                        )))
               ],
-              onChanged: (value) {
-                // Handle changes to the text field input
-                print('Input value: $value');
-              },
             ),
             const Spacer(),
             ElevatedButton(

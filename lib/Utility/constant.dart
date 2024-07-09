@@ -252,4 +252,6 @@ class Constant {
     '+1340',
     '+383'
   ];
+
+  static List<String> currencyCodes = ['INR', 'USD'];
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:expense_tracker/Utility/constant.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:expense_tracker/Views/OtpScreen/otp_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -26,7 +25,9 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> signIn() async {
-    isLoading = true;
+    setState(() {
+      isLoading = true;
+    });
     await _auth.verifyPhoneNumber(
       phoneNumber: _selectedCountryCode + _phoneNumberController.text,
       verificationCompleted: (PhoneAuthCredential credential) async {
@@ -50,24 +51,20 @@ class _LoginScreenState extends State<LoginScreen> {
         int? resendToken,
       ) async {
         isLoading = false;
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        await prefs.setBool('isLoggedIn', true);
-        setState(() {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => OtpScreen(
-                    verificationId: verificationId,
-                    contactNumber:
-                        "$_selectedCountryCode ${_phoneNumberController.text}")),
-          );
-        });
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => OtpScreen(
+                  verificationId: verificationId,
+                  contactNumber:
+                      "$_selectedCountryCode ${_phoneNumberController.text}")),
+        );
       },
       codeAutoRetrievalTimeout: (String verificationId) {
         setState(() {
           isLoading = false;
           if (kDebugMode) {
-            print('verificationId: ${verificationId}');
+            print('verificationId: $verificationId');
           }
         });
       },

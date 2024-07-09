@@ -32,6 +32,12 @@ class PreferencesHelper {
     _prefs.setBool('isLoggedIn', value ?? false);
   }
 
+  // Getter and Setter for currency
+  String? get currency => _prefs.getString('currency');
+  set currency(String? value) {
+    _prefs.setString('currency', value ?? '');
+  }
+
   // Method to remove all preferences
   Future<void> clear() async {
     await _prefs.clear();
