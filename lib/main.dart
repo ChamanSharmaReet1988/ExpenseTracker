@@ -4,6 +4,7 @@ import 'package:expense_tracker/Database/database.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:expense_tracker/Utility/preferences_helper.dart';
 import 'package:expense_tracker/Views/LoginScreen/login_view.dart';
+import 'package:expense_tracker/Views/OtpScreen/welcome_screen.dart';
 import 'package:expense_tracker/Views/TabBarScreen/tab_bar_screen.dart';
 
 // ignore: file_names
@@ -23,9 +24,9 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  Future<bool> checkLogin() async {
+  Future<int> checkLogin() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('isLoggedIn') ?? false;
+    return prefs.getInt('isLoggedIn') ?? 0;
   }
 
   // This widget is the root of your application.
@@ -33,9 +34,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: FutureBuilder<bool>(
+      home: FutureBuilder<int>(
         future: checkLogin(),
-        builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Scaffold(
               body: Center(
@@ -49,8 +50,13 @@ class MyApp extends StatelessWidget {
               ),
             );
           } else {
-            bool isLoggedIn = snapshot.data ?? false;
-            return isLoggedIn ? const TabBarScreen() : const LoginPage();
+            if (snapshot.data == 0) {
+              return const LoginPage();
+            } else if (snapshot.data == 1) {
+              return const WelcomeScreen();
+            } else {
+              return const TabBarScreen();
+            }
           }
         },
       ),

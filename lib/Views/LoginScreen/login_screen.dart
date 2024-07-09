@@ -73,97 +73,99 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login'),
-      ),
-      body: Stack(children: [
-        Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Row(
-                children: [
-                  Expanded(
-                      flex: 3,
-                      child: SizedBox(
-                        height: 60,
-                        child: DropdownButtonFormField<String>(
-                          value: _selectedCountryCode,
-                          items: Constant.countryCodes.map((String code) {
-                            return DropdownMenuItem<String>(
-                              value: code,
-                              child: Text(code),
-                            );
-                          }).toList(),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              _selectedCountryCode = newValue!;
-                            });
-                          },
-                          decoration: const InputDecoration(
-                            labelText: 'Code',
-                            border: OutlineInputBorder(),
+    return Stack(children: [
+      Scaffold(
+        appBar: AppBar(
+          title: const Text('Login'),
+        ),
+        body: Stack(children: [
+          Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                        flex: 3,
+                        child: SizedBox(
+                          height: 60,
+                          child: DropdownButtonFormField<String>(
+                            value: _selectedCountryCode,
+                            items: Constant.countryCodes.map((String code) {
+                              return DropdownMenuItem<String>(
+                                value: code,
+                                child: Text(code),
+                              );
+                            }).toList(),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                _selectedCountryCode = newValue!;
+                              });
+                            },
+                            decoration: const InputDecoration(
+                              labelText: 'Code',
+                              border: OutlineInputBorder(),
+                            ),
                           ),
-                        ),
-                      )),
-                  const SizedBox(width: 8),
-                  Expanded(
-                      flex: 7,
-                      child: SizedBox(
-                        height: 60,
-                        child: TextField(
-                          controller: _phoneNumberController,
-                          decoration: const InputDecoration(
-                            labelText: 'Phone Number',
-                            border: OutlineInputBorder(),
-                            contentPadding: EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 15),
+                        )),
+                    const SizedBox(width: 8),
+                    Expanded(
+                        flex: 7,
+                        child: SizedBox(
+                          height: 60,
+                          child: TextField(
+                            controller: _phoneNumberController,
+                            decoration: const InputDecoration(
+                              labelText: 'Phone Number',
+                              border: OutlineInputBorder(),
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 15),
+                            ),
+                            keyboardType: TextInputType.phone,
+                            style: const TextStyle(
+                              fontFamily: 'Inter',
+                              fontSize: 18,
+                              fontWeight: FontWeight.normal,
+                            ),
                           ),
-                          keyboardType: TextInputType.phone,
-                          style: const TextStyle(
-                            fontFamily: 'Inter',
-                            fontSize: 18,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                      )),
-                ],
+                        )),
+                  ],
+                ),
               ),
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width - 30,
-              height: 84,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 30),
-                child: TextButton(
-                  onPressed: signIn,
-                  style: TextButton.styleFrom(
-                    backgroundColor: const Color(0xFF7F3DFF),
-                    elevation: 4,
-                  ),
-                  child: const Text(
-                    'Login',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Color(0xFFEEE5FF),
-                      fontFamily: 'Inter',
-                      fontWeight: FontWeight.bold,
+              SizedBox(
+                width: MediaQuery.of(context).size.width - 30,
+                height: 84,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 30),
+                  child: TextButton(
+                    onPressed: signIn,
+                    style: TextButton.styleFrom(
+                      backgroundColor: const Color(0xFF7F3DFF),
+                      elevation: 4,
+                    ),
+                    child: const Text(
+                      'Login',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Color(0xFFEEE5FF),
+                        fontFamily: 'Inter',
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
-        if (isLoading)
-          Container(
-            color: Colors.black.withOpacity(0.5),
-            child: const Center(
-              child: CircularProgressIndicator(),
-            ),
+            ],
           ),
-      ]),
-    );
+        ]),
+      ),
+      if (isLoading)
+        Container(
+          color: Colors.black.withOpacity(0.5),
+          child: const Center(
+            child: CircularProgressIndicator(),
+          ),
+        ),
+    ]);
   }
 }

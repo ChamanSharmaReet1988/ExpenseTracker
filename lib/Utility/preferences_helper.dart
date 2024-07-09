@@ -27,9 +27,9 @@ class PreferencesHelper {
   }
 
   // Getter and Setter for isLoggedIn
-  bool? get isLoggedIn => _prefs.getBool('isLoggedIn');
-  set isLoggedIn(bool? value) {
-    _prefs.setBool('isLoggedIn', value ?? false);
+  int? get isLoggedIn => _prefs.getInt('isLoggedIn');
+  set isLoggedIn(int? value) {
+    _prefs.setInt('isLoggedIn', value ?? 0);
   }
 
   // Getter and Setter for currency

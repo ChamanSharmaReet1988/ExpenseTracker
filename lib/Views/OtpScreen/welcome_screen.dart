@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:expense_tracker/Utility/constant.dart';
@@ -26,16 +27,17 @@ class _WelcomeScreen extends State<WelcomeScreen> {
   void _saveMethod(BuildContext context) {
     PreferencesHelper prefs = PreferencesHelper();
     prefs.currency = selectedCurrencyCode;
+    prefs.isLoggedIn = 2;
 
     DateTime now = DateTime.now();
     BudgetTable budgetTable = BudgetTable();
     Budget myBudget = Budget(
       id: 1,
       title: "Budget",
-      year: "$now.year",
-      month: "$now.month",
-      day: "$now.day",
-      time: "$now.time",
+      year: "${now.year}",
+      month: "${now.month}",
+      day: "${now.day}",
+      time: DateFormat('HH:mm:ss').format(now),
       amount: _budgetController.text,
     );
     budgetTable.insertItemIntoBudget(myBudget);
@@ -83,7 +85,7 @@ class _WelcomeScreen extends State<WelcomeScreen> {
               children: [
                 SizedBox(height: 80), // Add some top padding
                 Text(
-                  "Let's add your monthly budget amount",
+                  "Let's set your income and currency",
                   style: TextStyle(
                     fontSize: 29,
                     fontFamily: 'Inter',
@@ -136,7 +138,7 @@ class _WelcomeScreen extends State<WelcomeScreen> {
                           controller: _budgetController,
                           decoration: const InputDecoration(
                             // labelText: 'Enter your text',
-                            hintText: 'Budget Amount...',
+                            hintText: 'Enter Income',
                             border: OutlineInputBorder(),
                           ),
                           keyboardType: TextInputType

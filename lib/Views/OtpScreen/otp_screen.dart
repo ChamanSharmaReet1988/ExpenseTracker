@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:expense_tracker/Views/OtpScreen/otp_model.dart';
@@ -69,16 +70,20 @@ class _OtpScreenState extends State<OtpScreen> {
 
     try {
       await _auth.signInWithCredential(credential);
-      isLoading = false;
+      setState(() {
+        isLoading = false;
+      });
       PreferencesHelper prefs = PreferencesHelper();
-      prefs.isLoggedIn = true;
+      prefs.isLoggedIn = 1;
       Navigator.pushReplacement(
         // ignore: use_build_context_synchronously
         context,
         MaterialPageRoute(builder: (context) => const WelcomeScreen()),
       );
     } catch (e) {
-      print('Failed to sign in: $e');
+      if (kDebugMode) {
+        print('Failed to sign in: $e');
+      }
     }
   }
 

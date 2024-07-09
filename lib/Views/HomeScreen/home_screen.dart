@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(const HomeScreen());
@@ -15,16 +15,46 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final List<String> months = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
   ];
   late String selectedMonth;
 
   final List<Map<String, String>> transactions = [
-    {"type": "Shopping", "description": "Buy some grocery", "amount": "-\$120", "time": "10:00 AM"},
-    {"type": "Subscription", "description": "Disney+ Annual", "amount": "-\$80", "time": "03:30 PM"},
-    {"type": "Food", "description": "Buy a ramen", "amount": "-\$32", "time": "07:30 PM"},
-    {"type": "Bills", "description": "Electricity Bill Fill", "amount": "-\$1200", "time": "09:30 PM"}
+    {
+      "type": "Shopping",
+      "description": "Buy some grocery",
+      "amount": "-\$120",
+      "time": "10:00 AM"
+    },
+    {
+      "type": "Subscription",
+      "description": "Disney+ Annual",
+      "amount": "-\$80",
+      "time": "03:30 PM"
+    },
+    {
+      "type": "Food",
+      "description": "Buy a ramen",
+      "amount": "-\$32",
+      "time": "07:30 PM"
+    },
+    {
+      "type": "Bills",
+      "description": "Electricity Bill Fill",
+      "amount": "-\$1200",
+      "time": "09:30 PM"
+    }
   ];
 
   @override
@@ -44,48 +74,56 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: [
               Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const CircleAvatar(
-                    backgroundImage: NetworkImage('https://via.placeholder.com/150'), // Replace with actual image URL
+                    backgroundImage: NetworkImage(
+                        'https://via.placeholder.com/150'), // Replace with actual image URL
                   ),
                   Column(
                     children: [
                       DropdownButtonHideUnderline(
                         child: DropdownButton<String>(
-                        value: selectedMonth,
-                        icon: const Icon(Icons.arrow_drop_down_sharp),
-                        iconSize: 24,
-                        elevation: 16,
-                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.black),
-                        underline: Container(
-                          height: 2,
-                          color: Colors.deepPurpleAccent,
+                          value: selectedMonth,
+                          icon: const Icon(Icons.arrow_drop_down_sharp),
+                          iconSize: 24,
+                          elevation: 16,
+                          style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.normal,
+                              color: Colors.black),
+                          underline: Container(
+                            height: 2,
+                            color: Colors.deepPurpleAccent,
+                          ),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              selectedMonth = newValue!;
+                            });
+                          },
+                          items: months
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                                value: value,
+                                child: Center(
+                                  child: Text(
+                                    value,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ));
+                          }).toList(),
                         ),
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            selectedMonth = newValue!;
-                          });
-                        },
-                        items: months.map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Center(
-                              child: Text(value, textAlign: TextAlign.center,),
-                            )
-                            
-                          );
-                        }).toList(),
                       ),
-                  ),
-                      const Text('Account Balance', style: TextStyle(color: Colors.grey)),
+                      const Text('Account Balance',
+                          style: TextStyle(color: Colors.grey)),
                     ],
                   ),
                   const Icon(Icons.notifications, color: Colors.purple),
                 ],
               ),
               const SizedBox(height: 16),
-              const Text('\$9400', style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold)),
+              const Text('\$9400',
+                  style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold)),
               const SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -105,7 +143,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Recent Transactions', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                    const Text('Recent Transactions',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold)),
                     Expanded(
                       child: ListView.builder(
                         itemCount: transactions.length,
@@ -117,7 +157,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             trailing: Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                Text(transactions[index]['amount']!, style: const TextStyle(color: Colors.red)),
+                                Text(transactions[index]['amount']!,
+                                    style: const TextStyle(color: Colors.red)),
                                 Text(transactions[index]['time']!),
                               ],
                             ),
@@ -137,19 +178,22 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildIncomeExpenseCard(String title, String amount, Color color) {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: color.withOpacity(0.1),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
         children: [
-          Text(title, style: TextStyle(color: color, fontSize: 18, fontWeight: FontWeight.bold)),
-          SizedBox(height: 8),
-          Text(amount, style: TextStyle(color: color, fontSize: 24, fontWeight: FontWeight.bold)),
+          Text(title,
+              style: TextStyle(
+                  color: color, fontSize: 18, fontWeight: FontWeight.bold)),
+          const SizedBox(height: 8),
+          Text(amount,
+              style: TextStyle(
+                  color: color, fontSize: 24, fontWeight: FontWeight.bold)),
         ],
       ),
     );
   }
 }
-
