@@ -50,9 +50,9 @@ class WelcomeScreen extends StatelessWidget {
               children: [
                 SizedBox(height: 80), // Add some top padding
                 Text(
-                  "Let's add your current Month's Budget",
+                  "Let's add your monthly budget amount",
                   style: TextStyle(
-                    fontSize: 34,
+                    fontSize: 29,
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w500,
                   ),
