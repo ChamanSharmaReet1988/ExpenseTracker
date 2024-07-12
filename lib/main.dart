@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
             } else if (snapshot.data == 1) {
               return const WelcomeScreen();
             } else {
-              return const TabBarScreen();
+              return  TabBarScreen();
             }
           }
         },
