@@ -1,3 +1,5 @@
+import 'package:expense_tracker/Database/budget_table.dart';
+import 'package:expense_tracker/Models/budget_model.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
@@ -29,6 +31,8 @@ class _HomeScreenState extends State<HomeScreen> {
     'December'
   ];
   late String selectedMonth;
+  Map<int, Budget> budgetDatadict = {};
+  BudgetTable budgetTable = BudgetTable();
 
   final List<Map<String, String>> transactions = [
     {
@@ -62,7 +66,17 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     // Set the selectedMonth to the current month
     selectedMonth = DateFormat('MMMM').format(DateTime.now());
+    // _loadBudgets();
   }
+
+  // Future<void> _loadBudgets() async {
+  //   List<Budget> budgets = await budgetTable.getBudgetData();
+  //   setState(() {
+  //     for (Budget budget in budgets) {
+  //       budgetDatadict[budget.id!] = budget;
+  //     }
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Center(
                                   child: Text(
                                     value,
-                                    textAlign: TextAlign.center,
+                                    textAlign: TextAlign.right,
                                   ),
                                 ));
                           }).toList(),
@@ -118,11 +132,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           style: TextStyle(color: Colors.grey)),
                     ],
                   ),
-                  const Icon(Icons.notifications, color: Colors.purple),
+                  const Icon(Icons.notifications, color:  const Color(0xFF7F3DFF)),
                 ],
               ),
               const SizedBox(height: 16),
-              const Text('\$9400',
+              const Text(
+                  'budgetDatadict[1].amount as String',
                   style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold)),
               const SizedBox(height: 16),
               Row(
@@ -131,12 +146,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   _buildIncomeExpenseCard('Budget', '\$5000', Colors.green),
                   _buildIncomeExpenseCard('Expenses', '\$1200', Colors.red),
                 ],
-              ),
-              const SizedBox(height: 16),
-              Container(
-                height: 150,
-                color: Colors.grey[200], // Placeholder for the graph
-                child: const Center(child: Text('Graph Placeholder')),
               ),
               const SizedBox(height: 16),
               Expanded(

@@ -53,13 +53,11 @@ class MyApp extends StatelessWidget {
             );
           } else {
             if (snapshot.data == 0) {
-              return AddExpense();
-
               return const LoginPage();
             } else if (snapshot.data == 1) {
               return const WelcomeScreen();
             } else {
-              return AddExpense();
+              return TabBarScreen();
             }
           }
         },

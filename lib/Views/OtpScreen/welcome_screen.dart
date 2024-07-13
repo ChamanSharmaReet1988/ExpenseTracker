@@ -63,7 +63,7 @@ class _WelcomeScreen extends State<WelcomeScreen> {
 
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => const TabBarScreen()),
+      MaterialPageRoute(builder: (context) => TabBarScreen()),
     );
   }
 
