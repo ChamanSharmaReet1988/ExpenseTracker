@@ -25,23 +25,6 @@ class _WelcomeScreen extends State<WelcomeScreen> {
   }
 
   void _saveMethod(BuildContext context) {
-    PreferencesHelper prefs = PreferencesHelper();
-    prefs.currency = selectedCurrencyCode;
-    prefs.isLoggedIn = 2;
-
-    DateTime now = DateTime.now();
-    BudgetTable budgetTable = BudgetTable();
-    Budget myBudget = Budget(
-      id: 1,
-      title: "Budget",
-      year: "${now.year}",
-      month: "${now.month}",
-      day: "${now.day}",
-      time: DateFormat('HH:mm:ss').format(now),
-      amount: _budgetController.text,
-    );
-    budgetTable.insertItemIntoBudget(myBudget);
-
     final String budgetAmount = _budgetController.text;
     if (budgetAmount.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -61,6 +44,23 @@ class _WelcomeScreen extends State<WelcomeScreen> {
       );
       return;
     }
+
+    PreferencesHelper prefs = PreferencesHelper();
+    prefs.currency = selectedCurrencyCode;
+    prefs.isLoggedIn = 2;
+
+    DateTime now = DateTime.now();
+    BudgetTable budgetTable = BudgetTable();
+    Budget myBudget = Budget(
+      title: "Budget",
+      year: "${now.year}",
+      month: "${now.month}",
+      day: "${now.day}",
+      time: DateFormat('HH:mm:ss').format(now),
+      amount: _budgetController.text,
+    );
+    budgetTable.insertItemIntoBudget(myBudget);
+
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => const TabBarScreen()),

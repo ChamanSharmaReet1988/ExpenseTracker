@@ -254,4 +254,18 @@ class Constant {
   ];
 
   static List<String> currencyCodes = ['INR', 'USD'];
+  static List<String> expenseCategory = [
+    'Food',
+    'Transport',
+    'Shopping',
+    'Bill',
+    'Others'
+  ];
+  static List<String> walletList = [
+    'Cash',
+    'Credit Card',
+    'Debit Card',
+    'UPI',
+    'Others'
+  ];
 }
