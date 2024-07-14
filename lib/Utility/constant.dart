@@ -258,7 +258,8 @@ class Constant {
     'Food',
     'Transport',
     'Shopping',
-    'Bill',
+    'Subscription',
+    'Bills',
     'Others'
   ];
   static List<String> walletList = [

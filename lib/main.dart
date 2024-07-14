@@ -3,9 +3,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:expense_tracker/Database/database.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:expense_tracker/Utility/preferences_helper.dart';
-import 'package:expense_tracker/Views/HomeScreen/add_expense.dart';
 import 'package:expense_tracker/Views/LoginScreen/login_view.dart';
 import 'package:expense_tracker/Views/OtpScreen/welcome_screen.dart';
+import 'package:expense_tracker/Views/TabBarScreen/tab_bar_screen.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
 // ignore: file_names
@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
             } else if (snapshot.data == 1) {
               return const WelcomeScreen();
             } else {
-              return TabBarScreen();
+              return const TabBarScreen();
             }
           }
         },
