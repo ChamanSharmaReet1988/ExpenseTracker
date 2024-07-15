@@ -7,14 +7,14 @@ import 'package:expense_tracker/Utility/color_constants.dart';
 import 'package:expense_tracker/Utility/preferences_helper.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
-class AddExpense extends StatefulWidget {
-  const AddExpense({super.key});
+class AddIncome extends StatefulWidget {
+  const AddIncome({super.key});
 
   @override
-  AddExpenseScreenState createState() => AddExpenseScreenState();
+  AddIncomeScreenState createState() => AddIncomeScreenState();
 }
 
-class AddExpenseScreenState extends State<AddExpense> {
+class AddIncomeScreenState extends State<AddIncome> {
   String? selectedCategory;
   String? currency;
   String? selectedWallet;
@@ -105,7 +105,7 @@ class AddExpenseScreenState extends State<AddExpense> {
                   fontSize: 20,
                   fontFamily: 'Inter',
                   fontWeight: FontWeight.w500)),
-          content: const Text('Your expense added successfully!',
+          content: const Text('Your income added successfully!',
               style: TextStyle(
                   color: Colors.black,
                   fontSize: 20,
@@ -152,7 +152,7 @@ class AddExpenseScreenState extends State<AddExpense> {
               child: Column(
                 children: [
                   Container(
-                    color: ColorConstants.primaryRedColor,
+                    color: ColorConstants.primarygreenColor,
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     height: 250, // Increased height for the top area
                     child: Column(
@@ -177,7 +177,7 @@ class AddExpenseScreenState extends State<AddExpense> {
                             const Expanded(
                               child: Center(
                                 child: Text(
-                                  'Add Expense',
+                                  'Add Income',
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 22,
@@ -257,7 +257,7 @@ class AddExpenseScreenState extends State<AddExpense> {
                       Container(
                         height: 100,
                         width: double.infinity,
-                        color: ColorConstants.primaryRedColor,
+                        color: ColorConstants.primarygreenColor,
                         child: const SizedBox(),
                       ),
                       Container(

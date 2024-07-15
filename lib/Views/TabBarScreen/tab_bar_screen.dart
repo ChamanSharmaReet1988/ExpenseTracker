@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:expense_tracker/Utility/color_constants.dart';
+import 'package:expense_tracker/Views/HomeScreen/add_income.dart';
+import 'package:expense_tracker/Views/HomeScreen/add_expense.dart';
 import 'package:expense_tracker/Views/HomeScreen/home_screen.dart';
 import 'package:expense_tracker/Views/Profile/profile_screen.dart';
 import 'package:expense_tracker/Views/BudgetScreens/budget_screen.dart';
@@ -14,7 +17,7 @@ class TabBarScreen extends StatefulWidget {
 class _TabBarScreenState extends State<TabBarScreen>
     with TickerProviderStateMixin {
   late TabController _tabController;
-  bool isExpanded = false;
+  bool isExpanded = true;
   late AnimationController animationController;
   late Animation<double> animation;
 
@@ -33,6 +36,7 @@ class _TabBarScreenState extends State<TabBarScreen>
       parent: animationController,
       curve: Curves.decelerate,
     );
+    animationController.forward();
   }
 
   void toggleFAB() {
@@ -78,9 +82,14 @@ class _TabBarScreenState extends State<TabBarScreen>
               );
             },
             child: FloatingActionButton(
+              heroTag: "btn1",
               backgroundColor: Colors.transparent,
               onPressed: () {
-                // Handle button 1 press
+                toggleFAB();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AddExpense()),
+                );
               },
               mini: true,
               child: Image.asset(
@@ -99,9 +108,14 @@ class _TabBarScreenState extends State<TabBarScreen>
               );
             },
             child: FloatingActionButton(
+              heroTag: "btn2",
               backgroundColor: Colors.transparent,
               onPressed: () {
-                // Handle button 2 press
+                toggleFAB();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AddIncome()),
+                );
               },
               mini: true,
               child: Image.asset(
@@ -113,8 +127,9 @@ class _TabBarScreenState extends State<TabBarScreen>
           ),
           const SizedBox(height: 5),
           FloatingActionButton(
+            heroTag: "btn3",
             shape: const CircleBorder(),
-            backgroundColor: const Color(0xFF7F3DFF),
+            backgroundColor: ColorConstants.primaryColor,
             onPressed: toggleFAB,
             child:
                 Icon(isExpanded ? Icons.add : Icons.close, color: Colors.white),
