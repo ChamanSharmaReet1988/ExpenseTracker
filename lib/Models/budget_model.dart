@@ -6,6 +6,7 @@ class Budget {
   String day;
   String time;
   String amount;
+  String desc;
 
   Budget({
     this.id,
@@ -15,6 +16,7 @@ class Budget {
     required this.day,
     required this.time,
     required this.amount,
+    required this.desc,
   });
 
   // Convert a Budget into a Map. The keys must correspond to the names of the columns in the database.
@@ -27,6 +29,7 @@ class Budget {
       'day': day,
       'time': time,
       'amount': amount,
+      'desc': desc
     };
   }
 
@@ -40,6 +43,7 @@ class Budget {
       day: map['day'],
       time: map['time'],
       amount: map['amount'],
+      desc: map['desc'],
     );
   }
 }

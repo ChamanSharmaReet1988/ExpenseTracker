@@ -20,4 +20,8 @@ class ExpenseTable {
       return Expense.fromMap(maps[i]);
     });
   }
+
+  Future<void> deleteTable() async {
+    await DatabaseHelper.database?.execute('Delete from ExpenseTable');
+  }
 }

@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:expense_tracker/Database/budget_table.dart';
 import 'package:expense_tracker/Views/OtpScreen/otp_model.dart';
 import 'package:expense_tracker/Utility/preferences_helper.dart';
 import 'package:expense_tracker/Views/OtpScreen/welcome_screen.dart';
+import 'package:expense_tracker/Views/TabBarScreen/tab_bar_screen.dart';
 
 // ignore: must_be_immutable
 class OtpScreen extends StatefulWidget {
@@ -74,12 +76,23 @@ class _OtpScreenState extends State<OtpScreen> {
         isLoading = false;
       });
       PreferencesHelper prefs = PreferencesHelper();
-      prefs.isLoggedIn = 1;
-      Navigator.pushReplacement(
-        // ignore: use_build_context_synchronously
-        context,
-        MaterialPageRoute(builder: (context) => const WelcomeScreen()),
-      );
+
+      BudgetTable budgetTable = BudgetTable();
+      if (await budgetTable.hasRecords()) {
+        prefs.isLoggedIn = 2;
+        Navigator.pushReplacement(
+          // ignore: use_build_context_synchronously
+          context,
+          MaterialPageRoute(builder: (context) => const TabBarScreen()),
+        );
+      } else {
+        prefs.isLoggedIn = 1;
+        Navigator.pushReplacement(
+          // ignore: use_build_context_synchronously
+          context,
+          MaterialPageRoute(builder: (context) => const WelcomeScreen()),
+        );
+      }
     } catch (e) {
       if (kDebugMode) {
         print('Failed to sign in: $e');

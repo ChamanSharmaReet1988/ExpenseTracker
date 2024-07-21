@@ -269,4 +269,16 @@ class Constant {
     'UPI',
     'Others'
   ];
+  static List<String> incomeCategory = [
+    'Salary',
+    'Freelance',
+    'Investments',
+    'Gifts',
+    'Business',
+    'Rental Income',
+    'Royalties',
+    'Interest',
+    'Dividends',
+    'Others',
+  ];
 }

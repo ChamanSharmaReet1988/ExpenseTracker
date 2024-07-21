@@ -34,7 +34,7 @@ class DatabaseHelper {
       'CREATE TABLE ExpenseTable(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, year TEXT, month TEXT, day TEXT, time TEXT, amount TEXT, desc Text, category Text)',
     );
     await db.execute(
-      'CREATE TABLE BudgetTable(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, year TEXT, month TEXT, day TEXT, time TEXT, amount TEXT)',
+      'CREATE TABLE BudgetTable(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, year TEXT, month TEXT, day TEXT, time TEXT, amount TEXT, desc Text)',
     );
   }
 

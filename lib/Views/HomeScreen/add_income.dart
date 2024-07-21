@@ -1,7 +1,9 @@
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:expense_tracker/Utility/constant.dart';
+import 'package:expense_tracker/Models/budget_model.dart';
 import 'package:expense_tracker/Models/expense_model.dart';
+import 'package:expense_tracker/Database/budget_table.dart';
 import 'package:expense_tracker/Database/expense_table.dart';
 import 'package:expense_tracker/Utility/color_constants.dart';
 import 'package:expense_tracker/Utility/preferences_helper.dart';
@@ -44,7 +46,7 @@ class AddIncomeScreenState extends State<AddIncome> {
     if (expenseAmount.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-            content: Text('Expense is mandatory to fill'),
+            content: Text('Income amount is mandatory to fill'),
             backgroundColor: Colors.red),
       );
       return;
@@ -54,7 +56,7 @@ class AddIncomeScreenState extends State<AddIncome> {
     if (expenseValue == null || expenseValue <= 0) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-            content: Text('Expense amount must be greater than 0.'),
+            content: Text('Income amount must be greater than 0.'),
             backgroundColor: Colors.red),
       );
       return;
@@ -79,17 +81,16 @@ class AddIncomeScreenState extends State<AddIncome> {
     }
 
     DateTime now = DateTime.now();
-    ExpenseTable expenseTable = ExpenseTable();
-    Expense expesne = Expense(
+    BudgetTable budgetTable = BudgetTable();
+    Budget expesne = Budget(
         title: selectedWallet ?? "",
         year: "${now.year}",
         month: "${now.month}",
         day: "${now.day}",
         time: DateFormat('HH:mm:ss').format(now),
         amount: '$expenseValue',
-        desc: descriptionController.text,
-        category: selectedCategory ?? "");
-    expenseTable.insertItemIntoExpenseTable(expesne);
+        desc: descriptionController.text);
+    budgetTable.insertItemIntoBudget(expesne);
 
     showAlertDialog(context);
   }
@@ -281,8 +282,7 @@ class AddIncomeScreenState extends State<AddIncome> {
                                   color: Colors.black),
                               value: selectedCategory,
                               hint: const Text("Category"),
-                              items:
-                                  Constant.expenseCategory.map((String code) {
+                              items: Constant.incomeCategory.map((String code) {
                                 return DropdownMenuItem<String>(
                                   value: code,
                                   child: Text(code),

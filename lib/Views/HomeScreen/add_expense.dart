@@ -44,7 +44,7 @@ class AddExpenseScreenState extends State<AddExpense> {
     if (expenseAmount.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-            content: Text('Expense is mandatory to fill'),
+            content: Text('Expense amount is mandatory to fill'),
             backgroundColor: Colors.red),
       );
       return;

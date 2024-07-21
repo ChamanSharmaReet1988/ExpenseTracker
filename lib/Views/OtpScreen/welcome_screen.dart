@@ -58,6 +58,7 @@ class _WelcomeScreen extends State<WelcomeScreen> {
       day: "${now.day}",
       time: DateFormat('HH:mm:ss').format(now),
       amount: _budgetController.text,
+      desc: "Initial Income",
     );
     budgetTable.insertItemIntoBudget(myBudget);
 
