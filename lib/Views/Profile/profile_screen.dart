@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:expense_tracker/Utility/common.dart';
+import 'package:expense_tracker/Views/Profile/settings.dart';
 import 'package:expense_tracker/Utility/preferences_helper.dart';
 import 'package:expense_tracker/Views/LoginScreen/login_view.dart';
 
@@ -295,7 +296,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               highlightColor: Colors.transparent,
                               splashColor: Colors.transparent,
                               onTap: () {
-                                if (index == 2) {
+                                if (index == 0) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => SettingsScreen()),
+                                  );
+                                } else if (index == 2) {
                                   showLogoutDialog();
                                 }
                               },
